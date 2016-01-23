@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block dup-jumbo %}
+<div></div>
+{% endblock %}
+
+{% block sidebar %}
+<div class="sidebar-article">
+
+    	<ul><a href="/admin"><img src="{% static "images/admin.png" %}" width="50">Admin</a></ul>
+    	<ul><a href="/articles/all"><img src="{% static "images/all articll.jpg" %}" width="50">All Articles</a></ul>
+    	<ul><a href="/articles/create"><img src="{% static "images/create articll.jpg" %}" width="50">Create Article</a></ul>
+
+    <h3>Search</h3>
+    {% csrf_token %}
+    <input type="text" id="search" name="search">
+    <ul id="search-results">
+
+    </ul>
+
+    </div>			
+{% endblock %}
+
+
+{% block content %}
+<div class="content-details">	
+	<h2>Contact Us!!</h2>
+	<p><font font-size="15">Name :-</font> Adarsh Srivastav</p>
+	<p><font font-size="15">Phone Number :-</font> (+91)740-6962012</p>
+	<p><font font-size="15">Email ID :-</font> adrshsrivastav@gmail.com</p>
+</div>
+{% endblock %}

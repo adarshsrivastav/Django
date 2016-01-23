@@ -1,0 +1,40 @@
+<style type="text/css">
+		body {
+			text-align: center;
+		}
+
+		#page {
+			width: 960px;
+			text-align: center;
+			margin: auto;
+			background-color: 0c0c0c;
+		}
+
+		#sidebar {
+			float: left;
+			text-align: center;
+			width: 400px;
+			border: 1px solid #000;
+		}
+
+		#content {
+			float: center;
+			margin: auto;
+			text-align: left;
+			width: 600px;
+			border: 1px solid #f00;
+		}
+
+		#header {
+			width: 600px;
+			text-align: left;
+			margin: auto;
+			background-color: 0c0c0c;
+			border: 1px solid black;
+		}
+
+		ul {
+			list-style-type: none;
+		}
+
+	</style>

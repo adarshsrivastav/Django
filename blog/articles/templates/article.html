@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+
+<head>
+<!--
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+-->
+
+
+<!-- Links for --> 
+		<link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
+		<link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}">
+		<link rel="stylesheet" type="text/css" href="{% static "css/bootstrap-theme.min.css" %}">
+		
+		<script src="{% static "js/jquery-2.0.0.min.js" %}"></script>
+		<script src="{% static "js/ajax.js" %}"></script>
+		css -->
+<!--Links for css -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		
+</head>
+
+<!-- overriding the jumbotron block from base template -->
+
+
+    	{% block dup-jumbo %}
+
+    	<div ><br/>
+		</div>
+    	
+		{% endblock %}
+
+
+<!-- overriding the Sidebar block from base template-->
+
+<!-- <br/><br/><br/><br/> -->
+{% block sidebar %}
+    <div class="sidebar-article">
+
+    	<ul><a href="/admin"><img src="{% static "images/admin.png" %}" width="50">Admin</a></ul>
+    	<ul><a href="/articles/all"><img src="{% static "images/all articll.jpg" %}" width="50">All Articles</a></ul>
+    	<ul><a href="/articles/create"><img src="{% static "images/create articll.jpg" %}" width="50">Create Article</a></ul>
+
+    <h3>Search</h3>
+    {% csrf_token %}
+    <input type="text" id="search" name="search">
+    <ul id="search-results">
+
+    </ul>
+
+    </div>
+{% endblock %}
+
+
+
+<!-- overriding the content block -->
+
+{% block content %}
+<div class="content-details">
+	<h1> {{ article.title }} </h1>
+	{% if article.star_image %}
+	<p>
+	<img src="{{MEDIA_URL}}{{article.star_image}}" width="730" height ="160"/>
+	</p>
+	{% endif %}
+	 {{ article.pub_date }} |
+     {{ article.category}} |
+	 by - {{ article.author }}
+</div>
+{% endblock %}
+
+{% block abc %}
+<div class="content-article">
+    {% if article.optional_image %}
+    <p>
+	<div id="floater"><img src="{{MEDIA_URL}}{{article.optional_image}}" width="200"/></div>
+	</p>
+    {% endif %}
+	<p>{{ article.body }}</p>
+	<p>{{ article.likes }} likes</p>
+	<p><a href="/articles/like/{{article.id}}">Like</a></p>
+</div>
+<!-- this is articles comments section 
+<div class="content-article">
+    <h4>Comments..</h4>
+ 
+    <div id="content-article-inner">
+        <div id="content-article-inner-user">
+            <p>{{ i.user_name }}</p>
+        </div>
+        <p>{{ i.user_comment }}</p>
+    </div>
+
+</div>
+-->
+{% endblock %}
+
+
+<!-- overriding the Slider block -->
+{% block slider %}
+
+<div class="content-article">
+    <h1>What to watch next</h1>
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+<!-- Indicators -->
+<ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+    <li data-target="#myCarousel" data-slide-to="3"></li>
+    <li data-target="#myCarousel" data-slide-to="4"></li>
+    <li data-target="#myCarousel" data-slide-to="5"></li>
+</ol>
+
+<!-- Wrapper for slides -->
+<div class="carousel-inner" role="listbox">
+    {% for p in articles %}
+		{% if forloop.counter == 1 %}
+    		<div class="item active" height="350" width="750">
+    	{% else %}
+    		<div class="item">
+    	{% endif %}
+
+        <a href="/articles/get/{{ p.id }}"><img src="{{MEDIA_URL}}{{p.star_image}}" alt="Image" height="200" width="200" ></a>
+  		<div class="carousel-caption" width="500" >
+    		<h3><font color="red">{{ p.alt_title }}</font></h3>
+    		<p ><font color="Green">by-{{ p.author }}</font></p>
+  		</div>
+    </div>
+	{% endfor %}    
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+</html>
+</div>
+
+{% endblock %}
